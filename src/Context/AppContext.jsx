@@ -11,6 +11,10 @@ export const AppProvider = ({ children }) => {
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
+    const storedCart = localStorage.getItem('cart');
+    if (storedCart) {
+      setCart(JSON.parse(storedCart));
+    }
   }, []);
 
   const login = (userData) => {
@@ -23,9 +27,36 @@ export const AppProvider = ({ children }) => {
     localStorage.removeItem('user');
   };
 
+  const addToCart = (product) => {
+    setCart((prevCart) => {
+      const updatedCart = [...prevCart, product];
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+      return updatedCart;
+    });
+  };
+
+  const removeFromCart = (productId) => {
+    setCart((prevCart) => {
+      const updatedCart = prevCart.filter(item => item.id !== productId);
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+      return updatedCart;
+    });
+  };
+
+  const updateCartItem = (productId, quantity) => {
+    setCart((prevCart) => {
+      const updatedCart = prevCart.map(item => 
+        item.id === productId ? { ...item, quantity } : item
+      );
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+      return updatedCart;
+    });
+  };
+
   return (
-    <AppContext.Provider value={{ user, login, logout, cart, setCart }}>
+    <AppContext.Provider value={{ user, login, logout, cart, addToCart, removeFromCart, updateCartItem }}>
       {children}
     </AppContext.Provider>
   );
 };
+

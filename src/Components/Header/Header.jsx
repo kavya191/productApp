@@ -8,7 +8,7 @@ const Header = () => {
       <Container fluid>
         <Navbar.Brand href="/">My App</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar-nav" />
-        <Navbar.Collapse id="navbar-nav">
+        {/* <Navbar.Collapse id="navbar-nav">
           <Nav className="me-auto">
             <LinkContainer to="/home">
               <Nav.Link>Home</Nav.Link>
@@ -23,7 +23,7 @@ const Header = () => {
               <Nav.Link>Cart</Nav.Link>
             </LinkContainer>
           </Nav>
-        </Navbar.Collapse>
+        </Navbar.Collapse> */}
       </Container>
     </Navbar>
   );

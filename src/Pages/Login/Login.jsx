@@ -14,12 +14,12 @@ const Login = () => {
     e.preventDefault();
    
     login({ email });
-    navigate('/profile');
+    navigate('/products');
   };
 
   return (
     <Container className='log_head'>
-      <Row className="d-flex justify-content-center align-item-center mt-5 p-5">
+      <Row className="d-flex justify-content-center align-item-center ">
         <Col md="4">
           <h2 className='log_title'>Login</h2>
           <Form onSubmit={handleSubmit}>

@@ -1,4 +1,4 @@
-.login_btn{
+.login_btn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,12 +6,16 @@
     margin-top: 1rem;
     text-align: center;
 }
-.log_head{
-    margin-bottom:2rem;
+
+.log_head {
+    padding-top: 5rem;
+    padding-bottom: 7rem;
 }
-.log_title{
+
+.log_title {
     padding: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+

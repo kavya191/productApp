@@ -1,0 +1,37 @@
+.single_row{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+.single_col{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4rem;
+    padding: 0.5rem; 
+}
+.pro_card {
+    
+    width: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+.pro_img{
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    display: block;
+    padding: 2rem;   
+}
+  
+.pro_body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
