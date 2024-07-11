@@ -1,0 +1,17 @@
+.reg_head{
+    margin-bottom:2rem;
+}
+.reg_title{
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.reg_btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    margin-top: 1rem;
+    text-align: center;
+}

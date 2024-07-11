@@ -7,19 +7,28 @@ import Profile from './Pages/Profile/Profile'
 import Products from './Pages/Products/Products'
 import Viewproduct from './Pages/Viewproduct/Viewproduct'
 import Cart from './Pages/Cart/Cart'
+import Header from './Components/Header/Header'
+import Footer from './Components/Footer/Footer'
+import { AppProvider } from './Context/AppContext'
 
 function App() {
   return (
-  <Routes>
-    
-      <Route path='/login' element={<Login />} />
+    <div>
+    <Header/>
+    <AppProvider>
+        <Routes>
+      <Route path='/' element={<Login />} />
       <Route path='/register' element={<Register />} />
       <Route path='/profile' element={<Profile />} />
       <Route path='/products' element={<Products />} />
       <Route path='/viewproduct' element={<Viewproduct />} />
       <Route path='/cart' element={<Cart />} />
-
     </Routes>
+
+    </AppProvider>
+    <Footer/>
+    </div>
+
 
   )
 }
