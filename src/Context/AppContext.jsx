@@ -29,7 +29,15 @@ export const AppProvider = ({ children }) => {
 
   const addToCart = (product) => {
     setCart((prevCart) => {
-      const updatedCart = [...prevCart, product];
+      const existingProduct = prevCart.find(item => item.id === product.id);
+      let updatedCart;
+      if (existingProduct) {
+        updatedCart = prevCart.map(item =>
+          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      } else {
+        updatedCart = [...prevCart, { ...product, quantity: 1 }];
+      }
       localStorage.setItem('cart', JSON.stringify(updatedCart));
       return updatedCart;
     });
@@ -45,7 +53,7 @@ export const AppProvider = ({ children }) => {
 
   const updateCartItem = (productId, quantity) => {
     setCart((prevCart) => {
-      const updatedCart = prevCart.map(item => 
+      const updatedCart = prevCart.map(item =>
         item.id === productId ? { ...item, quantity } : item
       );
       localStorage.setItem('cart', JSON.stringify(updatedCart));
@@ -59,4 +67,5 @@ export const AppProvider = ({ children }) => {
     </AppContext.Provider>
   );
 };
+
 
