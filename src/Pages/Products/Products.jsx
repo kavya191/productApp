@@ -3,10 +3,10 @@ import axios from 'axios';
 import { Container, Row, Col, Card, Spinner, InputGroup, Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import { Link, useSearchParams } from 'react-router-dom';
-
+import { ShoppingCart } from 'react-feather';
 import './Products.css';
 import { AppContext } from '../../Context/AppContext';
-
+import { FaStar, FaRegHeart } from "react-icons/fa";
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -24,7 +24,7 @@ const Products = () => {
         console.error("Error fetching products", error);
         setLoading(false);
       });
-    
+
     // Fetch categories
     axios.get('https://fakestoreapi.com/products/categories')
       .then((response) => {
@@ -129,15 +129,24 @@ const Products = () => {
       <Row className="pro_row">
         {products.map((product) => (
           <Col key={product.id} md={4} className="pro_col">
+
             <Card className="pro_card">
               <Card.Img className="pro_img" src={product.image} />
               <Card.Body className="pro_body">
                 <Card.Title className="pro_title">{product.title}</Card.Title>
                 <Card.Text className="pro_title">Price: ${product.price}</Card.Text>
-                <Card.Text className="pro_title">Rating: {product.rating.rate}</Card.Text>
-                <Button variant="primary" onClick={() => addToCart(product)}>Add to Cart</Button>
+                <Card.Text className="pro_title">Rating: {product.rating.rate} <FaStar className='rating' /></Card.Text>
+                <div className='btn_product'>
+                  <Button className='add-to-cart' onClick={() => addToCart(product)}>Add to Cart <ShoppingCart /></Button>
+                  <FaRegHeart className='wishlist' />
+                  <Link to={`/viewproduct/${product.id}`}>
+                    <Button className='single_view '>View Single</Button></Link>
+
+                </div>
               </Card.Body>
+
             </Card>
+
           </Col>
         ))}
       </Row>

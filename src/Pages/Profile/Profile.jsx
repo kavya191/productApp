@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 
 import { Container, Row, Col } from 'react-bootstrap';
 import { AppContext } from '../../Context/AppContext';
+import { Link } from 'react-router-dom';
 
 const Profile = () => {
   const { user, logout } = useContext(AppContext);
@@ -12,11 +13,13 @@ const Profile = () => {
 
   return (
     <Container>
-      <Row>
+      <Row className='d-flex justify-content-center align-item-center mt-5'>
         <Col>
           <h2>Profile</h2>
+          <p>Name:{user.fname}</p>
           <p>Email: {user.email}</p>
-          <button onClick={logout}>Logout</button>
+          <Link to='/'><button onClick={logout}>Logout</button></Link>
+          
         </Col>
       </Row>
     </Container>

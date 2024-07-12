@@ -3,6 +3,7 @@ import '../Login/Login.css'
 import { Link, useNavigate } from 'react-router-dom';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { AppContext } from '../../Context/AppContext';
+import CommonHeader from '../../Components/CommonHeader';
 
 const Login = () => {
   const { login } = useContext(AppContext);
@@ -18,10 +19,13 @@ const Login = () => {
   };
 
   return (
+    <>
+        <CommonHeader/>
     <Container className='log_head'>
-      <Row className="d-flex justify-content-center align-item-center ">
+  
+      <Row className="d-flex justify-content-center align-item-center">
         <Col md="4">
-          <h2 className='log_title'>Login</h2>
+          
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
@@ -50,6 +54,7 @@ const Login = () => {
         </Col>
       </Row>
     </Container>
+    </>
   );
 };
 
