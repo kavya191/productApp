@@ -30,7 +30,9 @@
 .rating{
     color:darkorange;
 }
-
+.pro_option{
+    width: max-content;
+}
 .pro_img {
     width: 200px;
     height: 200px;
@@ -80,6 +82,7 @@
         margin-top: 1rem;
         margin-bottom: 4rem;
     }
+   
     
     .pro_col {
         display: flex;
