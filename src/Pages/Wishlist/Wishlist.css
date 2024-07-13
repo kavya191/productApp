@@ -13,3 +13,30 @@
     align-items: center;
     
 }
+.wishlist_table{
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+@media only screen and (max-width: 600px) {
+    .list_page{
+        display: flex;
+     flex-wrap: wrap;
+     justify-content: center;
+     align-items: center;
+        padding-top: 10rem;
+    
+    }
+    .list_title{
+        margin-top: 5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+    }
+    .wishlist_table{
+        padding-left: 10rem;
+        padding-left: 10rem;
+    }
+    
+  }

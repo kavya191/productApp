@@ -9,7 +9,7 @@ const Viewproduct = () => {
     const [loading, setLoading] = useState(true);
   
     useEffect(() => {
-      axios.get(`https://fakestoreapi.com/products/${id}`)
+      axios.get(`https://fakestoreapi.com/products/${id}`)//get single view of product
         .then((response) => {
           setProduct(response.data);
           setLoading(false);

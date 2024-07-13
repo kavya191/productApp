@@ -1,23 +1,14 @@
 import React, { useContext, useState } from 'react';
-import { Navbar, Container, Button, Nav, Row, Col } from 'react-bootstrap';
+import { Navbar, Container, Button, Nav, } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { ShoppingCart, User, Heart } from 'react-feather';
 import { LinkContainer } from 'react-router-bootstrap';
 import { AppContext } from '../../Context/AppContext';
-import Modal from 'react-bootstrap/Modal';
+
 
 const Header = () => {
   const { cart, list } = useContext(AppContext);
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const { user, logout } = useContext(AppContext);
-
-  if (!user) {
-    return <h1 className='d-flex justify-content-center align-items-center fw-bold mt-5'>Please log in</h1>;
-  }
-
+ 
   // Calculate cart item count
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
   //calculate wishlist count
@@ -37,11 +28,11 @@ const Header = () => {
                    <b className="ms-1">{wishlistCount}</b> 
                 </Nav.Link>
               </LinkContainer>
-
+              <LinkContainer to="/profile">
               <Nav.Link className="text-white">
-                <User size={20} className="me-2" onClick={handleShow} />
+                <User size={20} className="me-2"  />
               </Nav.Link>
-
+              </LinkContainer>
               <LinkContainer to="/cart">
                 <Button className="text-white bg-dark border-0" type="submit">
                   <ShoppingCart size={20} />
@@ -53,33 +44,7 @@ const Header = () => {
         </Container>
 
       </Navbar>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>User Profile</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-
-
-          <Container>
-            <Row className='d-flex justify-content-center align-item-center mt-5'>
-              <Col >
-                <img className='d-flex justify-content-center align-items-center' src='https://i.postimg.cc/ZRZd9vpQ/images.png'></img>
-
-                <p>Email: {user.email}</p>
-
-
-              </Col>
-              <Col className='d-flex justify-content-center align-items-center' >
-                <Link to='/'><button onClick={logout}>Logout</button></Link>
-              </Col>
-
-            </Row>
-          </Container>
-
-
-        </Modal.Body>
-
-      </Modal>
+     
     </>
   );
 };

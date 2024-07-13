@@ -1,0 +1,20 @@
+.footer_head {
+    background-color: black;
+    color: white;
+    margin-top: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+@media only screen and (max-width: 600px) {
+    .footer_head {
+        background-color: black;
+        color: white;
+        margin-top: 30rem;
+        width: 100%;
+        display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    }
+  }

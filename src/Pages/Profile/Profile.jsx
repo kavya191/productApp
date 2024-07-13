@@ -1,27 +1,36 @@
-import React, { useContext } from 'react';
-
-import { Container, Row, Col } from 'react-bootstrap';
+import React, { useContext, useEffect, useState } from 'react';
+import { Container } from 'react-bootstrap';
 import { AppContext } from '../../Context/AppContext';
 import { Link } from 'react-router-dom';
+import '../Profile/Profile.css';
 
 const Profile = () => {
-  const { user, logout } = useContext(AppContext);
+  const { logout } = useContext(AppContext);
+  const [user, setUser] = useState(null);
 
-  if (!user) {
-    return <p>Please log in</p>;
-  }
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    if (storedUser) {
+      setUser(storedUser);
+    }
+  }, []);
 
   return (
     <Container>
-      <Row className='d-flex justify-content-center align-item-center mt-5'>
-        <Col>
-          <h2>Profile</h2>
-          <p>Name:{user.fname}</p>
-          <p>Email: {user.email}</p>
-          <Link to='/'><button onClick={logout}>Logout</button></Link>
-          
-        </Col>
-      </Row>
+      <h1 >User Profile</h1>
+      <div className='d-flex justify-content-center align-items-center mt-5 pb-5 mb-5'>
+        <img className=' pro_img' src='https://i.postimg.cc/ZRZd9vpQ/images.png' alt='Profile'></img>
+      </div>
+      {user && (
+        <>
+
+          <p className='d-flex justify-content-center align-items-center'>Email: {user.email}</p>
+
+        </>
+      )}
+      <div className='d-flex justify-content-center align-items-center'>
+        <Link to='/'><button onClick={logout} className='border-0 bg-dark text-white'>Logout</button></Link>
+      </div>
     </Container>
   );
 };

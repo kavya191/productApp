@@ -21,3 +21,25 @@
     text-decoration: none;
     border: none;
 }
+@media only screen and (max-width: 600px) {
+    .cart_page{
+        display: flex;
+     flex-wrap: wrap;
+     justify-content: center;
+     align-items: center;
+        padding-top: 10rem;
+    
+    }
+    .cart_title{
+        margin-top: 5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+    }
+    .cart_table{
+        padding-left: 10rem;
+        padding-left: 10rem;
+    }
+    
+  }

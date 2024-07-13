@@ -5,12 +5,13 @@ export const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [cart, setCart] = useState([]);
-  const [list, setList] = useState([])
+  const [list, setList] = useState([]);
   const [queryParams, setQueryParams] = useState({
     category: '',
     sort: '',
     search: ''
   });
+ 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
@@ -28,14 +29,20 @@ export const AppProvider = ({ children }) => {
 
   const login = (userData) => {
     setUser(userData);
-    localStorage.setItem('user', JSON.stringify(userData));
+    localStorage.setItem('user', JSON.stringify(userData)); // Store user data in local storage
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('user');
+    localStorage.removeItem('user'); // Remove user data from local storage
   };
-  //add-to-cart
+  const register = (userData) => {
+
+    setUser(userData);
+    localStorage.setItem('user', JSON.stringify(userData)); // Store user data in local storage
+  };
+
+  // Cart functions
   const addToCart = (product) => {
     setCart((prevCart) => {
       const existingProduct = prevCart.find(item => item.id === product.id);
@@ -70,8 +77,7 @@ export const AppProvider = ({ children }) => {
     });
   };
 
-
-  //wishlist
+  // Wishlist functions
   const wishList = (product) => {
     setList((prevList) => {
       const existingProduct = prevList.find(item => item.id === product.id);
@@ -87,6 +93,7 @@ export const AppProvider = ({ children }) => {
       return updatedWishList;
     });
   };
+
   const removeFromList = (productId) => {
     setList((prevList) => {
       const updatedWishList = prevList.filter(item => item.id !== productId);
@@ -104,6 +111,7 @@ export const AppProvider = ({ children }) => {
       return updatedWishList;
     });
   };
+
   const updateQueryParams = (newParams) => {
     setQueryParams((prevParams) => ({
       ...prevParams,
@@ -113,12 +121,10 @@ export const AppProvider = ({ children }) => {
 
   return (
     <AppContext.Provider value={{
-      user, login, logout, cart, list, addToCart, removeFromCart,
-      updateCartItem, wishList, removeFromList, updateListItem,queryParams, updateQueryParams
+      user,  login, logout, cart, list, addToCart, removeFromCart,
+      updateCartItem, wishList, removeFromList, updateListItem, queryParams, updateQueryParams, register
     }}>
       {children}
     </AppContext.Provider>
   );
 };
-
-

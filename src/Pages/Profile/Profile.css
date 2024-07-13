@@ -1,0 +1,26 @@
+.pro_img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+}
+h1{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    margin-top: 6rem;
+}
+@media only screen and (max-width: 600px) {
+    .pro_img{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 2rem;
+    }
+    h1{
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+        margin-top: 6rem;
+    }
+  }

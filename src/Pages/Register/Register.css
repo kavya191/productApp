@@ -1,5 +1,6 @@
 .reg_head{
     margin-bottom:2rem;
+    margin-top: 1rem;
 }
 .reg_title{
     padding: 2rem;
@@ -15,3 +16,9 @@
     margin-top: 1rem;
     text-align: center;
 }
+@media only screen and (max-width: 600px) {
+    .reg_head{
+        margin-bottom:2rem;
+        margin-top: 10rem;
+    }
+  }

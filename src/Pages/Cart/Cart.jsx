@@ -7,24 +7,24 @@ import { CiCircleRemove } from "react-icons/ci";
 const Cart = () => {
   const { cart, removeFromCart, updateCartItem } = useContext(AppContext);
 
+  //update cart
   const handleQuantityChange = (productId, quantity) => {
     if (quantity > 0) {
       updateCartItem(productId, quantity);
     }
   };
-
+  //calculate tolal
   const calculateTotal = () => {
     return cart.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2);
   };
-
   return (
     <Container className='cart_page'>
       <h2 className='cart_title' >Your Cart</h2>
       {cart.length === 0 ? (
         <p>Your cart is empty</p>
       ) : (
-        <Table striped bordered hove 
-        className='mt-5'>
+        <Table striped bordered hove
+          className='mt-5'>
           <thead>
             <tr>
               <th>Product</th>
@@ -54,7 +54,7 @@ const Cart = () => {
                 <td>${(item.price * item.quantity).toFixed(2)}</td>
                 <td>
                   <Button className='border-0' onClick={() => removeFromCart(item.id)}>
-                    <CiCircleRemove/>
+                    <CiCircleRemove />
                   </Button>
                   <Button className='check_out' >
                     Check Out
