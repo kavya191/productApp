@@ -1,0 +1,15 @@
+.list_page{
+    display: flex;
+ flex-wrap: wrap;
+ justify-content: center;
+ align-items: center;
+    padding-top: 4rem;
+
+}
+.list_title{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}

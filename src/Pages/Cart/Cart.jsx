@@ -23,7 +23,8 @@ const Cart = () => {
       {cart.length === 0 ? (
         <p>Your cart is empty</p>
       ) : (
-        <Table striped bordered hove className='mt-5'r>
+        <Table striped bordered hove 
+        className='mt-5'>
           <thead>
             <tr>
               <th>Product</th>

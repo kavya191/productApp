@@ -11,8 +11,8 @@ const Products = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState([]);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const { addToCart } = useContext(AppContext);
+
+  const { addToCart,wishList,queryParams, updateQueryParams } = useContext(AppContext);
 
   useEffect(() => {
     axios.get('https://fakestoreapi.com/products')
@@ -25,7 +25,6 @@ const Products = () => {
         setLoading(false);
       });
 
-    // Fetch categories
     axios.get('https://fakestoreapi.com/products/categories')
       .then((response) => {
         setCategories(response.data);
@@ -36,8 +35,7 @@ const Products = () => {
   }, []);
 
   useEffect(() => {
-    const category = searchParams.get('category') || '';
-    const sort = searchParams.get('sort') || '';
+    const { category, sort, search } = queryParams;
     setLoading(true);
 
     let apiUrl = `https://fakestoreapi.com/products`;
@@ -47,9 +45,16 @@ const Products = () => {
 
     axios.get(apiUrl)
       .then((response) => {
-        let sortedProducts = response.data;
+        let filteredProducts = response.data;
+
+        if (search) {
+          filteredProducts = filteredProducts.filter(product =>
+            product.title.toLowerCase().includes(search.toLowerCase())
+          );
+        }
+
         if (sort) {
-          sortedProducts = sortedProducts.sort((a, b) => {
+          filteredProducts = filteredProducts.sort((a, b) => {
             if (sort === 'price-asc') {
               return a.price - b.price;
             } else if (sort === 'price-desc') {
@@ -58,45 +63,45 @@ const Products = () => {
             return 0;
           });
         }
-        setProducts(sortedProducts);
+
+        setProducts(filteredProducts);
         setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching products", error);
         setLoading(false);
       });
-  }, [searchParams]);
+  }, [queryParams]);
 
   const handleCategoryChange = (e) => {
     const category = e.target.value;
-    setSearchParams({ category, sort: searchParams.get('sort') || '' });
+    updateQueryParams({ category });
   };
 
   const handleSortChange = (e) => {
     const sort = e.target.value;
-    setSearchParams({ category: searchParams.get('category') || '', sort });
+    updateQueryParams({ sort });
   };
 
   const handleSearchChange = (e) => {
     const search = e.target.value;
-    setSearchParams({ category: searchParams.get('category') || '', sort: searchParams.get('sort') || '', search });
+    updateQueryParams({ search });
   };
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    const search = searchParams.get('search') || '';
-    setSearchParams({ category: searchParams.get('category') || '', sort: searchParams.get('sort') || '', search });
+    const search = queryParams.search || '';
+    updateQueryParams({ search });
   };
 
   if (loading) {
     return <Spinner animation="border" />;
   }
-
   return (
     <Container>
       <Row className="mb-4">
         <Col md={6} className='pro_filter'>
-          <Form.Select onChange={handleCategoryChange} value={searchParams.get('category') || ''}>
+          <Form.Select onChange={handleCategoryChange} value={queryParams.category || ''}>
             <option value=''>All Categories</option>
             {categories.map((category) => (
               <option key={category} value={category}>{category}</option>
@@ -104,7 +109,7 @@ const Products = () => {
           </Form.Select>
         </Col>
         <Col md={6}>
-          <Form.Select className='pro_filter' onChange={handleSortChange} value={searchParams.get('sort') || ''}>
+          <Form.Select className='pro_filter' onChange={handleSortChange} value={queryParams.sort || ''}>
             <option value=''>Sort By</option>
             <option value='price-asc'>Price: Low to High</option>
             <option value='price-desc'>Price: High to Low</option>
@@ -117,7 +122,7 @@ const Products = () => {
             <Form.Control
               type="text"
               placeholder="Search"
-              value={searchParams.get('search') || ''}
+              value={queryParams.search || ''}
               onChange={handleSearchChange}
             />
             <Button variant="outline-secondary" onClick={handleSearchSubmit}>
@@ -127,18 +132,18 @@ const Products = () => {
         </Col>
       </Row>
       <Row className="pro_row">
-        {products.map((product) => (
+      {products.map((product) => (
           <Col key={product.id} md={4} className="pro_col">
-
             <Card className="pro_card">
               <Card.Img className="pro_img" src={product.image} />
+              
               <Card.Body className="pro_body">
                 <Card.Title className="pro_title">{product.title}</Card.Title>
                 <Card.Text className="pro_title">Price: ${product.price}</Card.Text>
                 <Card.Text className="pro_title">Rating: {product.rating.rate} <FaStar className='rating' /></Card.Text>
                 <div className='btn_product'>
                   <Button className='add-to-cart' onClick={() => addToCart(product)}>Add to Cart <ShoppingCart /></Button>
-                  <FaRegHeart className='wishlist' />
+                  <FaRegHeart className='wishlist' onClick={()=>wishList(product)} />
                   <Link to={`/viewproduct/${product.id}`}>
                     <Button className='single_view '>View Single</Button></Link>
 
@@ -155,4 +160,3 @@ const Products = () => {
 };
 
 export default Products;
-

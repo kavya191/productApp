@@ -7,7 +7,7 @@ import { AppContext } from '../../Context/AppContext';
 import Modal from 'react-bootstrap/Modal';
 
 const Header = () => {
-  const { cart } = useContext(AppContext);
+  const { cart, list } = useContext(AppContext);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -20,6 +20,8 @@ const Header = () => {
 
   // Calculate cart item count
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
+  //calculate wishlist count
+   const wishlistCount = list.reduce((total, item) => total + item.quantity, 0)
 
   return (
     <>
@@ -29,9 +31,10 @@ const Header = () => {
           <Navbar.Toggle aria-controls="navbar-nav" />
           <Navbar.Collapse id="navbar-nav">
             <Nav className="ms-auto">
-              <LinkContainer to="/wishlist">
+              <LinkContainer to="/wish">
                 <Nav.Link className="text-white">
                   <Heart size={20} className="me-2" />
+                   <b className="ms-1">{wishlistCount}</b> 
                 </Nav.Link>
               </LinkContainer>
 
