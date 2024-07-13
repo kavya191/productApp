@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { FaStar} from "react-icons/fa";
 import { Container, Row, Col, Card, Spinner } from 'react-bootstrap';
 import '../Viewproduct/Viewproduct.css'
 const Viewproduct = () => {
@@ -34,7 +35,7 @@ const Viewproduct = () => {
             <Card.Title>{product.title}</Card.Title>
             <Card.Text>{product.description}</Card.Text>
             <Card.Text>Price: ${product.price}</Card.Text>
-            <Card.Text>Rating: {product.rating.rate}</Card.Text>
+            <Card.Text>Rating: {product.rating.rate} <FaStar className='rating'/></Card.Text>
           </Card.Body>
         </Card>
       </Col>

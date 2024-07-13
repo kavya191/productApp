@@ -5,6 +5,9 @@
     margin-top: 4rem;
     margin-bottom: 4rem;
 }
+.rating{
+    color:darkorange;
+}
 .single_col{
     display: flex;
     justify-content: center;
